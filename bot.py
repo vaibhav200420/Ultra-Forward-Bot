@@ -1,21 +1,12 @@
-# Jishu Developer 
-# Don't Remove Credit 🥺
-# Telegram Channel @Madflix_Bots
-# Backup Channel @JishuBotz
-# Developer @JishuDeveloper
-
-
-
-
 import asyncio
-import logging 
+import logging
 import logging.config
-from database import db 
-from config import Config  
+from database import db
+from config import Config
 from pyrogram import Client, __version__
-from pyrogram.raw.all import layer 
+from pyrogram.raw.all import layer
 from pyrogram.enums import ParseMode
-from pyrogram.errors import FloodWait 
+from pyrogram.errors import FloodWait
 
 logging.config.fileConfig('logging.conf')
 logging.getLogger().setLevel(logging.INFO)
@@ -26,7 +17,7 @@ class Bot(Client):
         super().__init__(
             Config.BOT_SESSION,
             api_hash=Config.API_HASH,
-            api_id=Config.API_ID,
+            api_id=int(Config.API_ID),  # Ensure API_ID is converted to int
             plugins={
                 "root": "plugins"
             },
@@ -58,7 +49,6 @@ class Bot(Client):
               success += 1
            except Exception:
               failed += 1 
-    #    await self.send_message("venombotsupport", text)
         if (success + failed) != 0:
            await db.rmve_frwd(all=True)
            logging.info(f"Restart message status"
@@ -69,17 +59,3 @@ class Bot(Client):
         msg = f"@{self.username} stopped. Bye."
         await super().stop()
         logging.info(msg)
-
-
-
-
-
-
-
-
-
-# Jishu Developer 
-# Don't Remove Credit 🥺
-# Telegram Channel @Madflix_Bots
-# Backup Channel @JishuBotz
-# Developer @JishuDeveloper
